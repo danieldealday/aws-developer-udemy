@@ -7,3 +7,6 @@ alias target
 VPC
 subnet ID
 CIDR
+data at rest
+https://en.wikipedia.org/wiki/Data_at_rest
+availability zone
