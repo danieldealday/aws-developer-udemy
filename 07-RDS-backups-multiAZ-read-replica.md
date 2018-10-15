@@ -35,9 +35,25 @@
 - to encrypt an existing databse, first create a snapshot, make a copy of that snapshot, and then encrypt the copy
 
 ## Multi-AZ
+- synchronous
 - allows you to have an exact copy of your production database in another availability zone 
 - when your production database is written to the write action is synchronously copied to the standby database
 - useful scenarios
   - database maintenance
   - database failure
   - availability zone failure
+- SQL Server, Oracle, MySQL Server, PostgreSQL, MariaDB
+
+## Read Replica
+- allow you to have a read-only copy of your production database achieved through asynchronous replication from  the primary RDS instance to the read replica
+- primarly used for read-heavy database workloads
+- used to relieve load from the primary production database
+- able to have read replica of a read replica; there will be some replication latency
+- use read replicas to scale out
+- MySQL Server, PostgreSQL, MariaDB, Aurora
+- not for disaster recovery
+- must have automatic backups turned on in order to deploy a read replica
+- you can have up to 5 read replica copies of any database
+- each read replica will have its own DNS end point
+- able to have read replicas that have Multi-AZ
+- read replicas can be promoted to be their own databases; this breaks the replication
