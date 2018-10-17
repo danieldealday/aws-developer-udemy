@@ -1,0 +1,78 @@
+# EC2 Summary Exam Tips
+- On-Demand - allows you to pay a fixed rate by the hour (or by the second) with no commitment
+- Reserved - provides you with a capacity reservatino and offer a significant discount on the hourly charge for an instance; 1-year or 3-year terms
+- Spot - enables you to bid whatever price you want for instance capacity, providing for even greater savings if your applications have flexible start and end times
+  - if the instance is terminated by Amazon EC2 then you will not be charged for a partial hour of usage, however, if you terminate the instance yourself, you will be charged for the ocmplete hour in which the instance ran
+- Dedicated Hosts - physical EC2 server dedicated for your use; can help you reduce costs by allowing you to use your existing server-bound software licenses
+- AWS Instance Types anagram - FIGHT DR McPX
+- SSD
+  - General Purpose SSD - balances price and performance for a wide variety of workloads
+  - Provisioned IOPS SSD - highest performance SSD volume for mission-critical low-latency or high throughput workloads
+- Magnetic
+  - Throughput Optimized HDD - low cast HDD volume designed for frequently accessed, throughput-intensive workloads
+  - Cold HDD - lowest cost HDD volume designed for less frequently accessed workloads
+  - Magnetic - previous generation; cannot be a boot volume
+- Types of Load Balancers
+  - application
+  - network
+  - classic
+- 504 Error: gateway has timed-out; application is not responding within the idle timeout period
+  - Fix: troubleshoot the application; is it the Web Server or Database Server
+- if you need the IPv4 address of your end-user, look for the X-Forwarded-For header
+- Route 53 - Amazon's DNS service
+  - allows you to map your domain names to:
+    - EC2 instances
+    - load balancers
+    - S3 buckets
+- CLI
+  - Least Privilege - always give your users the minimum amount of access required
+  - Create Groups - assign your users to groups; your users will automatically inherit the permissions of the group; the groups permissions are assigned using policy documents
+  - Secret Access Key - you will see this only once; if you don't save it, you can delete the Key-Pair (Access Key ID and Secret Access Key) and regenerate it; you will need to run AWS Configure again
+  - Do Not Use Just One Access Key
+    - do not create just one access key and share that with all your developer; if someone leaves the company on bad terms, then you will need to delete the key and create a new one and every developer would then need to update their keys; instead create one key pair per developer
+  - You Can Use The CLI ON Your PC
+    - you can install the CLI on your Mac, Linux or Windows PC: (A Cloud Guru Instructor personally uses S3 to store all their personal files in the cloud)
+  - roles allow you to not use Access Key ID's and Secret Access Keys
+  - roles are preferred from a security perspective
+  - roles are controlled by policies
+  - you can change a policy on a role and it will take immediate affect
+  - you can attach and detach roles to running EC2 instances without having to stop or terminate these instances
+  - you can encrypt the root device (the volume the OS is installed on) using Operating System level encryption
+  - you can encrypt the root device voume by first taking a snapshot of that volume and then creating a copy of that snap with encryption; you can then make an AMI of this snap and deploy the encrypted root device volume
+  - you can encrypt additional attached volumes using the console. CLI or API
+- Database Types
+  - RDS (relational database service) - OLTP (online transaction processing)
+    - SQL
+    - MySQL
+    - PostgreSQL
+    - Oracle
+  - DynamoDB - NoSQL
+  - RedShift - OLAP (online analytical processing)
+  - Elasticache - In-Memory Caching
+    - Memcached
+    - Redis
+  - Multi-AZ RDS - used for Disaster Recovery only; not primarly used for improving performance; performance improvement is achieved through Read Replicas
+  - Read Replica Databases
+    - used for scaling, NOT direct
+    - must have automatic backups turned on in order to deploy a read replica
+    - you can have up to 5 read replica copies of any database
+    - you can have read replicas of read replicas, but watch out for replication latency
+    - each read replica will have its own DNS endpoint
+    - you can have read replicas that have Multi-AZ
+    - you can create read replicas of Multi-AZ source databases
+    - read replicas can be promoted to be their own databases; this break the replication
+    - you can have a read replica in a second region (for MySQL and MariaDB)
+  - Elasticache
+    - will usually be given a scenario where a particular database is under a lot of stress/load; you may be asked which service you should use to alleviate this
+    - Elasticache is a good choice if your database is particular read-heavy and not prone frequent changing
+    - RedShift is a good answer if the reason your database is feeling stress is because management keep running OLAP transaction on it etc.
+    - Use Memcached if ...
+      - object caching is your primary goal
+      - you want to keep things as simple as possible
+      - you want to scale your cached horizontally (scale out)
+    - Use Redis if ...
+      - you have advanced data types such as lists, hashes and sets
+      - you are doing data sorting and ranking (such as leaderboards)
+      - data persistence
+      - Multi-AZ
+      - publisher/subscriber capabilities are needed
