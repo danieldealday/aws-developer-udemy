@@ -1,3 +1,4 @@
+real time messaging protocol (RTMP)
 hosted zone
 server record
 naked domain
@@ -7,8 +8,10 @@ alias target
 VPC
 subnet ID
 CIDR
-data at rest
-https://en.wikipedia.org/wiki/Data_at_rest
+SSL
+TSL (transport layer security)
+advanced encryption standard 256-bit (AES)
+data at rest -https://en.wikipedia.org/wiki/Data_at_rest
 availability zone
 
 ## AWS Platform
