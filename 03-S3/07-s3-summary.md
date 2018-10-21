@@ -7,4 +7,6 @@
   - `https://s3-eu-west-1.amazonaws.com/examplebucket`
 - Read after Write consistency for PUTS of new objects
 - Eventual consistency for overwrite PUTS and DELETES (can take some time to propagate)
-- 
+- S3 Storage Classes/Tiers
+    - S3 (durability, immediately available, frquently accessed)
+    - S3 - IA (durable, immediately available, infrquently accessed)
