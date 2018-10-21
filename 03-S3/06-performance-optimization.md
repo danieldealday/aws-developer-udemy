@@ -24,3 +24,12 @@
   - mybucket/o3n6-2018-08-22-09-00-00/cust1248473/photo3.jpg
   ```
 
+## Summary
+- remember the 2 main approaches to performance optimization for S3
+  - GET-intensive Workloads - used CloudFront
+  - Mixed Workloads - avoid using sequential key names for your S3 objects, instead, ad a random prefix like a hex hash to the key name to prevent multiple objects from being stored on the same partition
+- S3 PERFORMANCE UPDATE, July 2018
+  - 3500 PUT requests per second
+  - 5500 GET requests
+  - no longer need to randomize your object key-names to achieve faster performance
+  - logical and sequential naming patterns can now be used without any performance implication
