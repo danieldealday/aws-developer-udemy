@@ -1,4 +1,4 @@
-# SQS
+# SQS (simple queue service)
 - a web service that gives you access to a message queue that can be used to store messages while waiting for a computer to process them
 - Amazon SQS is a distributed queue system that enables web service applications to quickly and reliably queue messages that one component in the application generates to be consumed by another component
 - a queue is a temporary repository for messages that are awaiting processing
@@ -26,6 +26,12 @@
 - FIFO queues also suport message groups that allow multiple ordered message groups within a single queue
 - FIFO queues are limited to 300 transactions per second (TPS), but have all the capabilities of standard queues
 
+## Visibility Timeout
+- the amount of time that the message is invisible in the SQS queue after a reader picks up that message; provided the job is processed before the visibility time out expires, the message will then be deleted from the queue - if the job is not processed within that time, the message will become visible again and another reader will process it... this could result in the same message being delivered twice
+- default visibility timeout is 30 seconds
+- increase it if your task takes greater than 30 seconds
+- maximum is 12 hours
+
 ## Key Facts
 - SQS is pull-based
 - messages are 256 KB in size
@@ -33,8 +39,20 @@
 - defaul retention period is 4 days
 - SQS guarantees that your messages will be processed at least once
 
-## Visibility Timeout
-- the amount of time that the message is invisible in the SQS queue after a reader picks up that message; provided the job is processed before the visibility time out expires, the message will then be deleted from the queue - if the job is not processed within that time, the message will become visible again and another reader will process it... this could result in the same message being delivered twice
-- default visibility timeout is 30 seconds
-- increase it if your task takes greater than 30 seconds
-- maximum is 12 hours
+## SQS Long Polling
+- a way to retrieve messages from your Amazon SQS queues
+- while the regular short polling returns immediately (even if the message queue being polled is empty), long polling doesn't return a response until a message arrives in the message queue or the long poll times out
+- as such, long polling can save you money
+
+## Tips
+- SQS is a distributed message queueing system
+- allows you to decouple the components of an application so that they are independent
+- pull-based not push-based
+- standard queues (default) - best-effort ordering; message delivered at least once
+- FIFO queues (first in first out) - ordering strictly preserved, message delivered once, no duplicates e.g. good for banking transactions which need to hapen in strict order
+- visibility timeout
+  - default is 30 seconds
+  - increase if your task takes greater than 30 secnods to complete
+  - maximum of 12 hours
+- short polling - messages are returned immediately even if no messages are in the queue
+- long polling - polls the queue periodically and only returns a response when a message is in the queue or the timeout is reached
