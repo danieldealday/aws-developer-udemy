@@ -64,3 +64,19 @@ Outputs:
   - Resources - mandatory - the AWS resources to create
   - Mappings - create custom mapping like `Region: AMI`
   - Transforms - reference code located in S3 e.g. Lambda code or re-usable snippets of CloudFormation code
+
+## In-Practice
+0. develop your own CloudFormation Template
+  - take care that your AMI is specific to the region you are working in
+  - makes sure to designate your Parameters, Resources, InstanceSecurityGroup for specific resources, etc.
+1. visit CloudFormation in console
+2. select a template
+  - use design template tool
+  - use your own template
+  - CloudFormation will save you template to a S3 bucket
+3. assign appropriate Key-Pair
+4. conigure ability for rollback-failure
+  - available from the AWS API
+5. create CloudFormation to execute
+  - build tasks are available to be viewed
+  - instance can be viewed in EC2
